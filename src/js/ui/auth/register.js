@@ -19,7 +19,7 @@ export async function onRegister(event) {
 
         if (result) {
             alert('Registration successful! Redirecting to login...');
-            window.location.href = '/auth/login'; 
+            window.location.href = '/auth/login/'; 
         }
     } catch (error) {
         console.error(error);
