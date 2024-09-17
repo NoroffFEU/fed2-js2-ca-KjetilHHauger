@@ -35,11 +35,9 @@ export async function register({ name, email, password, bio, banner, avatar }) {
     redirect: "follow"
   };
 
-
   return fetch(API_AUTH_REGISTER, requestOptions)
     .then((response) => response.json()) 
     .then((result) => {
-      console.log(result);
       return result; 
     })
     .catch((error) => {
