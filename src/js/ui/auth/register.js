@@ -8,23 +8,20 @@ export async function onRegister(event) {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,
-        bio: '', 
-        avatar: '',
-        banner: '' 
+        bio: document.getElementById('bio').value || null,
+        avatar: document.getElementById('avatar').value || null, 
+        banner: document.getElementById('banner').value || null,
     };
 
     try {
-        
         const result = await register(formData);
         console.log(result); 
 
-       
         if (result) {
             alert('Registration successful! Redirecting to login...');
             window.location.href = '/auth/login'; 
         }
     } catch (error) {
-        
         console.error(error);
         alert(`Registration failed: ${error.message}`);
     }
