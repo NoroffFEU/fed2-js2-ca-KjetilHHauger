@@ -15,7 +15,6 @@ export async function onRegister(event) {
 
     try {
         const result = await register(formData);
-        console.log(result); 
 
         if (result) {
             alert('Registration successful! Redirecting to login...');
