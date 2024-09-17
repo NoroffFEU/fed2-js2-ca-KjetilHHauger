@@ -8,9 +8,9 @@ export async function onRegister(event) {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,
-        bio: document.getElementById('bio').value || null,
-        avatar: document.getElementById('avatar').value || null, 
-        banner: document.getElementById('banner').value || null,
+        bio: document.getElementById('bio') ? document.getElementById('bio').value : null, 
+        avatar: document.getElementById('avatar') ? document.getElementById('avatar').value : null, 
+        banner: document.getElementById('banner') ? document.getElementById('banner').value : null,
     };
 
     try {
