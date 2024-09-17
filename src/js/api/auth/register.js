@@ -1,42 +1,50 @@
 import { API_AUTH_REGISTER } from "../constants";
 
-export async function register({
-  name,
-  email,
-  password,
-  bio,
-  banner,
-  avatar,
-}) {
+export async function register({ name, email, password, bio, banner, avatar }) {
   const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+  myHeaders.append("Content-Type", "application/json");
 
-const raw = JSON.stringify(
-  {
-    "name": name,
-    "email": email,
-    "password": password,
-    "bio": bio, 
-    "avatar": {
-      "url": avatar,
-      "alt": "My avatar alt text"
-    },
-    "banner": {
-      "url": banner, 
-      "alt": "My banner alt text"
-    },
+  const rawData = {
+    name: name, 
+    email: email, 
+    password: password, 
+  };
+
+  if (bio) {
+    rawData.bio = bio; 
   }
-);
 
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
+  if (avatar) {
+    rawData.avatar = {
+      url: avatar, 
+      alt: "My avatar alt text",
+    };
+  }
 
-fetch(API_AUTH_REGISTER, requestOptions)
-  .then((response) => response.text())
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error));
+  if (banner) {
+    rawData.banner = {
+      url: banner, 
+      alt: "My banner alt text",
+    };
+  }
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify(rawData), 
+    redirect: "follow"
+  };
+
+
+  return fetch(API_AUTH_REGISTER, requestOptions)
+    .then((response) => response.json()) 
+    .then((result) => {
+      console.log(result);
+      return result; 
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error; 
+    });
 }
+
