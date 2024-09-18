@@ -19,34 +19,52 @@ import { getKey } from "../auth/key";
  * @returns {Promise<void>} A promise that resolves when the request is complete.
  */
 export async function createPost({ title, body, tags, media }) {
-
   const myHeaders = new Headers(); 
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", getKey()); 
+  const token = await getKey(); 
+  myHeaders.append("Authorization", `Bearer ${token}`); 
 
   const apiKeyHeader = customHeaders();
   const [key, value] = apiKeyHeader.entries().next().value;
   myHeaders.append(key, value); 
 
-  const raw = JSON.stringify({
-    "title": title,
-    "body": body,
-    "tags": [tags],
-    "media": {
-      "url": media,
-      "alt": "string"
-    }
-  });
+  const postData = {
+    title: title,
+    body: body,
+  };
+
+  if (tags) {
+    postData.tags = [tags]; 
+  }
+
+  if (media) {
+    postData.media = {
+      url: media,
+      alt: "Image alt text",
+    };
+  }
 
   const requestOptions = {
     method: "POST",
     headers: myHeaders,
-    body: raw,
+    body: JSON.stringify(postData),
     redirect: "follow"
   };
 
-  fetch(API_SOCIAL_POSTS, requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+  try {
+    const response = await fetch(API_SOCIAL_POSTS, requestOptions);
+    const result = await response.json();
+    
+    if (response.ok) {
+      alert("Post created successfully!");
+
+      window.location.href = "/";
+    } else {
+      console.error(result);
+      alert("Error creating post: " + result.message);
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+    alert("Failed to create post. Please try again later.");
+  }
 }
