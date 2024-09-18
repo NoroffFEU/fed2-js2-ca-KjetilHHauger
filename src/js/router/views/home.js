@@ -15,20 +15,24 @@ authGuard();
  *
  * @async
  * @function renderPosts
- * @returns {Promise<void>} A promise that resolves when the posts have been rendered.
+ * @returns {Promise<void>}
  */
 async function renderPosts() {
   try {
-    const response = await readPosts(12, 1);
+    const response = await readPosts();
+
     const posts = response.data;
 
     postsContainer.innerHTML = '';
 
     posts.forEach(post => {
+      const postMedia = post.media 
+        ? `<img class="post-img" src="${post.media.url}" alt="${post.media.alt}">` 
+        : ''; 
 
       postsContainer.innerHTML += `
         <a href="/post/index.html?postID=${post.id}" class="post" data-postID="${post.id}">
-          <img class="post-img" src="${post.media.url}" alt="${post.media.alt}">
+          ${postMedia}
           <h2 class="post-title">${post.title}</h2>
           <p class="post-body">${post.body}</p>
         </a>
