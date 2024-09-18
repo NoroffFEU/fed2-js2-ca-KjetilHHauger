@@ -18,7 +18,7 @@ export async function onCreatePost(event) {
   const title = form.title.value;
   const body = form.post.value; 
   const media = form.image.value;
-  const tags = []; 
+  const tags = form.tags.value; 
 
   try {
     await createPost({ title, body, tags, media });
