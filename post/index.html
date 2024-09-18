@@ -9,5 +9,38 @@
   </head>
   <body>
     <h1>Post Page</h1>
+    <body>
+      <div id="navbar">
+        <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+        <h1>Post Page</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/profile/">My Profile</a>
+            </li>
+            <li>
+              <a href="/auth/login/">Login</a>
+            </li>
+            <li>
+              <a href="/auth/register/">Register</a>
+            </li>
+          </ul>
+        </nav>
+        <button>Logout</button>
+      </div>
+
+          <!-- dummypost -->
+      <a href="post/index.html" class="post" data-postID="${postID}">
+        <img class="post-img">
+        <h2 class="post-title"></h2>
+        <p class="post-body"></p>
+        <div>
+          <!-- if logged in -->
+          <button>Delete</button>
+          <bnutton>Edit</bnutton>
+        </div>
+    
+      </a>
+    </body>
   </body>
 </html>
