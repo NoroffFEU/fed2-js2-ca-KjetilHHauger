@@ -1,4 +1,8 @@
 import { onLogin } from "../../ui/auth/login";
+import { setLogoutListener } from '../../ui/global/logout';
+document.addEventListener('DOMContentLoaded', () => {
+    setLogoutListener(); 
+});
 /**
  * Sets up an event listener for the login form submission. If the form is found, 
  * it adds a submit event listener to trigger the login functionality.
