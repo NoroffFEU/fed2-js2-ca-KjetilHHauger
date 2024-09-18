@@ -1,9 +1,14 @@
 import { authGuard } from "../../utilities/authGuard";
 import { readPosts } from "../../api/post/read"; 
+import { setLogoutListener } from '../../ui/global/logout';
+authGuard();
+document.addEventListener('DOMContentLoaded', () => {
+    setLogoutListener(); 
+});
 
 const postsContainer = document.getElementById("posts-container");
 
-authGuard();
+
 
 /**
  * Fetches posts data from the API and renders them into the DOM.
