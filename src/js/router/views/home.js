@@ -42,7 +42,7 @@ async function renderPosts() {
       postElement.classList.add('post');
 
       postElement.innerHTML = `
-        <a href="profile/index.html?authorID=${post.author.name}" class="author-link" data-authorID="${post.author.name}">
+        <a href="profile/?authorID=${post.author.name}" class="author-link" data-authorID="${post.author.name}">
         ${authorAvatar}
           <span class="author-name">${post.author.name}</span>
         </a>
