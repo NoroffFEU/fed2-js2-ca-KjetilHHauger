@@ -4,7 +4,7 @@ import { headers as customHeaders } from "../headers";
 
 export async function readPost(id) {}
 
-export async function readPosts() {
+export async function readPosts(limit = 12, page = 1,) {
   const myHeaders = new Headers();
   myHeaders.append("X-Noroff-API-Key", API_KEY); 
 
@@ -18,7 +18,7 @@ export async function readPosts() {
   };
 
   try {
-    const response = await fetch(API_SOCIAL_POSTS, requestOptions);
+    const response = await fetch(API_SOCIAL_POSTS+`?limit=${limit}&page=${page}&_author=true`, requestOptions);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch posts: ${response.statusText}`);
