@@ -25,7 +25,7 @@ function getAuthorIDFromURL() {
  * @returns {string|null} The username if present, otherwise null.
  */
 function getLoggedInUserName() {
-    return localStorage.getItem('username');
+    return localStorage.getItem('userID');
 }
 
 const authorID = getAuthorIDFromURL();
