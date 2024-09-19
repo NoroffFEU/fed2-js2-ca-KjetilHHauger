@@ -25,23 +25,34 @@ const postsContainer = document.getElementById("posts-container");
 async function renderPosts() {
   try {
     const response = await readPosts();
-
     const posts = response.data;
 
     postsContainer.innerHTML = '';
 
     posts.forEach(post => {
       const postMedia = post.media 
-        ? `<img class="post-img" src="${post.media.url}" alt="${post.media.alt}">` 
+        ? `<img class="post-media" src="${post.media.url}" alt="${post.media.alt || 'Post media'}">`
         : ''; 
 
-      postsContainer.innerHTML += `
-        <a href="/post/index.html?postID=${post.id}" class="post" data-postID="${post.id}">
+      const authorAvatar = post.author.avatar 
+        ? `<img class="author-img" src="${post.author.avatar.url}" alt="${post.author.name}'s avatar">`
+        : ''; 
+
+      const postElement = document.createElement('div');
+      postElement.classList.add('post');
+
+      postElement.innerHTML = `
+        <a href="profile/index.html?authorID=${post.author.name}" class="author-link" data-authorID="${post.author.name}">
+          <span class="author-name">${post.author.name}</span>
+          ${authorAvatar}
+        </a>
+        <a href="/post/index.html?postID=${post.id}" data-postID="${post.id}">
           ${postMedia}
           <h2 class="post-title">${post.title}</h2>
           <p class="post-body">${post.body}</p>
         </a>
       `;
+      postsContainer.appendChild(postElement);
     });
 
   } catch (error) {
