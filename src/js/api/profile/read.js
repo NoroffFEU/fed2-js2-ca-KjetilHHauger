@@ -5,7 +5,8 @@ import { getKey } from '../auth/key';
  * Fetches profile data for a given username.
  *
  * @param {string} username - The username of the profile to fetch.
- * @returns {Promise<Object>} The profile data.
+ * @returns {Promise<Object>} A promise that resolves to the profile data.
+ * @throws Will throw an error if the network request fails.
  */
 export async function readProfile(username) {
 
