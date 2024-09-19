@@ -1,5 +1,3 @@
-// src/js/api/profile/read.js
-
 import { API_SOCIAL_PROFILES, API_KEY } from '../constants';
 import { getKey } from '../auth/key';
 
