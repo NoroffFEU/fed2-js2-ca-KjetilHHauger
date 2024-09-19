@@ -96,12 +96,10 @@ function escapeHTML(str) {
     const profileAvatar = (profileData.avatar && profileData.avatar.url) ? profileData.avatar.url : '/images/default-avatar.png';
     const profileBio = escapeHTML(profileData.bio || '');
   
-    // Update the profile banner image
     const profileBanner = (profileData.banner && profileData.banner.url) ? profileData.banner.url : '/images/default-banner.png';
     profileBannerImage.src = profileBanner;
     profileBannerImage.alt = 'Profile Banner';
   
-    // Construct the HTML string for the profile
     const profileHTML = `
       <img class="profile-image" src="${profileAvatar}" alt="${profileName}'s Avatar">
       <h2 class="profile-name">${profileName}</h2>
@@ -132,10 +130,8 @@ function escapeHTML(str) {
       ` : ''}
     `;
   
-    // Set the innerHTML of the profile container
     profileContainer.innerHTML = profileHTML;
-  
-    // Reattach event listeners for the edit profile functionality
+
     if (isOwnProfile) {
       const editProfileButton = document.getElementById('editProfileButton');
       const updateProfileForm = document.getElementById('updateProfileForm');
@@ -155,8 +151,6 @@ function escapeHTML(str) {
       }
     }
   }
-  
-  
   
 async function loadUserPosts() {
   const username = isOwnProfile ? loggedInUserName : authorID;
@@ -185,7 +179,6 @@ function displayUserPosts(posts) {
         ? `<img class="author-img" src="${post.author.avatar.url}" alt="${post.author.name}'s avatar">`
         : '<img class="author-img" src="/images/default-avatar.png" alt="Default avatar">';
       
-  
       const postHTML = `
         <div class="post">
           <div class="author" data-authorID="${post.author.name}">
