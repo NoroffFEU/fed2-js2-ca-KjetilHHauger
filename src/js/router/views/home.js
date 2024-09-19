@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const postsContainer = document.getElementById("posts-container");
 
-
-
 /**
  * Fetches posts data from the API and renders them into the DOM.
  * 
@@ -46,7 +44,7 @@ async function renderPosts() {
         ${authorAvatar}
           <span class="author-name">${post.author.name}</span>
         </a>
-        <a href="/post/index.html?postID=${post.id}" data-postID="${post.id}">
+        <a href="/post/?postID=${post.id}" data-postID="${post.id}">
           ${postMedia}
           <h2 class="post-title">${post.title}</h2>
           <p class="post-body">${post.body}</p>
