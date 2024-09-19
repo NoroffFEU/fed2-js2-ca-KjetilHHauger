@@ -7,19 +7,19 @@ import { apiLogin } from '../../api/auth/login.js';
  * @returns {Promise<void>} Redirects the user to the homepage on success.
  */
 export async function onLogin(event) {
-    event.preventDefault(); 
-    
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  event.preventDefault(); 
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const result = await apiLogin({ email, password });
+
+  if (result.error) {
+    alert("Login failed: " + result.error);
+  } else {
+    localStorage.setItem("accessToken", result.data.accessToken); 
+    localStorage.setItem("userID", result.data.name);
   
-    const result = await apiLogin({ email, password });
-  
-    if (result.error) {
-      alert("Login failed: " + result.error);
-    } else {
-      localStorage.setItem("accessToken", result.data.accessToken); 
-      
-      window.location.href = "/";
-    }
+    window.location.href = "/";
   }
-  
+}
