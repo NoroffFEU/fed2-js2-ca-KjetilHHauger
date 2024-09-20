@@ -24,24 +24,7 @@
         <button class="logout-btn">Logout</button>
       </div>
       <div id="post-container">
-                  <!-- dummypost -->
-                  <div class="post">
-                    <a href="profile/?authorID=${post.author.name}" class="author-link" data-authorID="${post.author.name}">
-                      <span class="author name">${post.author.name}</span>
-                      <img class="author-img" src="${post.author.avatar.url}">
-                    </a>
-                    <a href="/post/?postID=${post.id}" data-postID="${post.id}">
-                      <img class="post-media" src="&{post.media.url}">
-                      <h2 class="post-title">${post.title}</h2>
-                      <p class="post-body">${post.body}</p>
-            
-                    </a>
-                    <!-- if logged in -->
-                    <div>
-                      <a href="/post/edit/">Edit</a>
-                      <button>Delete</button>
-                    </div>
-                   </div>
+
 
       </div>
     </body>
