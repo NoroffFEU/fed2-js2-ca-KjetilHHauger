@@ -2,6 +2,7 @@ import { authGuard } from "../../utilities/authGuard";
 import { setLogoutListener } from '../../ui/global/logout';
 import { readProfile } from '../../api/profile/read';
 import { readPostsByUser } from '../../api/post/read';
+import { onDeletePost } from "../../ui/post/delete";
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
@@ -144,8 +145,8 @@ function displayProfileData(profileData) {
       </div>
       <form name="updateProfile" id="updateProfileForm" style="display: none;">
         <div>
-          <label for="name">Username</label>
-          <input id="name" type="text" name="name" required value="${profileName}" />
+          <label for="bio">Bio</label>
+          <input id="bio" type="text" name="bio" required value="${profileBio}" />
         </div>
         <div>
           <label for="avatar">Avatar URL</label>
@@ -154,10 +155,6 @@ function displayProfileData(profileData) {
         <div>
           <label for="banner">Banner URL</label>
           <input id="banner" type="text" name="banner" required value="${escapeHTML(profileData.banner && profileData.banner.url ? profileData.banner.url : '')}" />
-        </div>
-        <div>
-          <label for="bio">Bio</label>
-          <textarea id="bio" name="bio">${profileBio}</textarea>
         </div>
         <button type="submit">Update Profile</button>
       </form>
@@ -224,6 +221,10 @@ function displayUserPosts(posts) {
             ? `<img class="author-img" src="${post.author.avatar.url}" alt="${post.author.name}'s avatar">`
             : '<img class="author-img" src="/images/default-avatar.png" alt="Default avatar">';
 
+        const deleteButtonHTML = isOwnProfile
+            ? `<button class="delete-btn" data-post-id="${post.id}">Delete</button>`
+            : '';
+
         const postHTML = `
         <div class="post">
           <div class="author" data-authorID="${post.author.name}">
@@ -235,10 +236,25 @@ function displayUserPosts(posts) {
             <h2 class="post-title">${post.title}</h2>
             <p class="post-body">${post.body}</p>
           </a>
+          ${deleteButtonHTML}
         </div>
       `;
-
         postsContainer.innerHTML += postHTML;
     });
+
+    if (isOwnProfile) {
+        const deleteButtons = document.querySelectorAll(".delete-btn")
+        deleteButtons.forEach(button => {
+            const postID = button.dataset.postId;
+            button.addEventListener('click', function() {
+                console.log("You clicked me!")
+                console.log(postID)
+                onDeletePost(postID);
+
+            });
+        });
+        
+        
+    }
 }
 
