@@ -1,7 +1,40 @@
 import { API_SOCIAL_POSTS, API_KEY, API_SOCIAL_PROFILES } from "../constants";
 import { getKey } from "../auth/key";
 
-export async function readPost(id) {}
+/**
+ * Fetches a post by its ID.
+ *
+ * @param {string} id - The ID of the post to fetch.
+ * @returns {Promise<Object>} A promise that resolves to the post data.
+ */
+export async function readPost(id) {
+  const myHeaders = new Headers();
+  myHeaders.append("X-Noroff-API-Key", API_KEY); 
+
+  const token = await getKey(); 
+  myHeaders.append("Authorization", `Bearer ${token}`); 
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(`${API_SOCIAL_POSTS}/${id}?_author=true`, requestOptions);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch post: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log(result);
+    return result.data;
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error;
+  }
+}
 
 /**
  * Fetches a list of posts with pagination.
