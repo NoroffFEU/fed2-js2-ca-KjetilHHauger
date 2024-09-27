@@ -230,14 +230,10 @@ function displayUserPosts(posts) {
         deleteButtons.forEach(button => {
             const postID = button.dataset.postId;
             button.addEventListener('click', function() {
-                console.log("You clicked me!")
-                console.log(postID)
                 onDeletePost(postID);
 
             });
         });
-        
-        
     }
 }
 

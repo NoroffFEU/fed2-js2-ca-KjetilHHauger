@@ -8,14 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPost();
 });
 
-
 async function renderPost() {
     const postID = getPostIDFromURL();
     console.log('Post ID:', postID);
 
     try {
         const post = await readPost(postID);
-        console.log('Post Data:', post);
 
         const loggedInUserName = getLoggedInUserName();
         const isOwnProfile = post.author.name === loggedInUserName;
