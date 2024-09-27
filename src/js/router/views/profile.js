@@ -5,6 +5,7 @@ import { readPostsByUser } from '../../api/post/read';
 import { onDeletePost } from "../../ui/post/delete";
 import { getAuthorIDFromURL } from "../../utilities/getAuthorIDFromURL";
 import { getLoggedInUserName } from "../../utilities/getLoggedInUserName";
+import { onUpdateProfile } from "../../ui/profile/update";
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
@@ -15,6 +16,7 @@ authGuard();
 const authorID = getAuthorIDFromURL();
 const loggedInUserName = getLoggedInUserName();
 const isOwnProfile = !authorID || authorID === loggedInUserName;
+const updateProfileForm = document.getElementById("updateProfileForm")
 
 /**
  * Toggles the visibility of the edit profile button and update profile form
@@ -160,6 +162,7 @@ function displayProfileData(profileData) {
             }
 
             editProfileButton.addEventListener('click', toggleUpdateProfileForm);
+            updateProfileForm.addEventListener("submit", onUpdateProfile);
         } else {
             console.warn('Edit profile button or update profile form not found.');
         }
@@ -235,5 +238,11 @@ function displayUserPosts(posts) {
             });
         });
     }
+}
+
+if (updateProfileForm) {
+    updateProfileForm.addEventListener("submit", onUpdateProfile);
+} else {
+    console.warn('Update profile form not found in the DOM.');
 }
 
