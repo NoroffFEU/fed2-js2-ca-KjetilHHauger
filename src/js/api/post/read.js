@@ -28,7 +28,6 @@ export async function readPost(id) {
     }
 
     const result = await response.json();
-    console.log(result);
     return result.data;
   } catch (error) {
     console.error("Error fetching post:", error);

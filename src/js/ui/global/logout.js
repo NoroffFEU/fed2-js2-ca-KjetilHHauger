@@ -10,7 +10,6 @@ export function setLogoutListener() {
 
     logoutButtons.forEach(button => {
         button.addEventListener('click', () => {
-            console.log(button, "yay")
             localStorage.removeItem('accessToken');
             localStorage.removeItem('userID');
             window.location.href = "/auth/login/";

@@ -22,7 +22,6 @@ export async function onCreatePost(event) {
 
   try {
     await createPost({ title, body, tags, media });
-    console.log("Post created successfully!");
   } catch (error) {
     console.error("Error creating post:", error);
   }
