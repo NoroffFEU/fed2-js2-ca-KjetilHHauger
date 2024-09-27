@@ -2,6 +2,7 @@ import { readPost } from '../../api/post/read';
 import { setLogoutListener } from '../../ui/global/logout';
 import { getPostIDFromURL } from '../../utilities/getPostIDFromURL';
 import { getLoggedInUserName } from '../../utilities/getLoggedInUserName';
+import { onDeletePost } from '../../ui/post/delete';
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
@@ -10,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function renderPost() {
     const postID = getPostIDFromURL();
-    console.log('Post ID:', postID);
 
     try {
         const post = await readPost(postID);
