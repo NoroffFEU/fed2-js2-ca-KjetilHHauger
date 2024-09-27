@@ -1,4 +1,6 @@
 import { API_SOCIAL_PROFILES } from "../constants";
+import { API_KEY } from "../constants";
+import { getKey } from "../auth/key";
 
 export async function updateProfile(bio, { avatar, banner }) {
   const myHeaders = new Headers();
