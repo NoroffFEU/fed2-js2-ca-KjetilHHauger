@@ -1,19 +1,13 @@
 import { readPost } from '../../api/post/read';
 import { setLogoutListener } from '../../ui/global/logout';
+import { getPostIDFromURL } from '../../utilities/getPostIDFromURL';
+import { getLoggedInUserName } from '../../utilities/getLoggedInUserName';
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
     renderPost();
 });
 
-function getPostIDFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('postID');
-}
-
-function getLoggedInUserName() {
-    return localStorage.getItem('userID');
-}
 
 async function renderPost() {
     const postID = getPostIDFromURL();
