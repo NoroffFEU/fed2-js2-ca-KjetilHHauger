@@ -1,27 +1,19 @@
 import { readPost } from '../../api/post/read';
 import { setLogoutListener } from '../../ui/global/logout';
+import { getPostIDFromURL } from '../../utilities/getPostIDFromURL';
+import { getLoggedInUserName } from '../../utilities/getLoggedInUserName';
+import { onDeletePost } from '../../ui/post/delete';
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
     renderPost();
 });
 
-function getPostIDFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('postID');
-}
-
-function getLoggedInUserName() {
-    return localStorage.getItem('userID');
-}
-
 async function renderPost() {
     const postID = getPostIDFromURL();
-    console.log('Post ID:', postID);
 
     try {
         const post = await readPost(postID);
-        console.log('Post Data:', post);
 
         const loggedInUserName = getLoggedInUserName();
         const isOwnProfile = post.author.name === loggedInUserName;
