@@ -5,7 +5,6 @@ import { deletePost  } from '../../api/post/delete';  // Import API to delete po
  * @param {Event} event - The click event from the delete button.
  */
 export async function onDeletePost(postID) {
-    console.log(postID);
 
     if (confirm('Are you sure you want to delete this post?')) {
         try {

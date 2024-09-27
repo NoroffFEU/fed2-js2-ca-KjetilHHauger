@@ -36,8 +36,6 @@ function toggleEditProfileSections(isOwnProfile) {
             editProfileSection.style.display = 'none';
             updateProfileForm.style.display = 'none';
         }
-    } else {
-        console.warn('Edit profile elements not found in the DOM.');
     }
 }
 
@@ -60,8 +58,6 @@ if (isOwnProfile) {
         }
 
         editProfileButton.addEventListener('click', toggleUpdateProfileForm);
-    } else {
-        console.warn('Edit profile button or update profile form not found.');
     }
 }
 
@@ -163,8 +159,6 @@ function displayProfileData(profileData) {
 
             editProfileButton.addEventListener('click', toggleUpdateProfileForm);
             updateProfileForm.addEventListener("submit", onUpdateProfile);
-        } else {
-            console.warn('Edit profile button or update profile form not found.');
         }
     }
 }
@@ -210,6 +204,9 @@ function displayUserPosts(posts) {
         const deleteButtonHTML = isOwnProfile
             ? `<button class="delete-btn" data-post-id="${post.id}">Delete</button>`
             : '';
+        const editButtonHTML = isOwnProfile
+        ? `<a href="/post/edit/?postID=${post.id}" class="edit-btn">Edit</a>`
+        : '';
 
         const postHTML = `
         <div class="post">
@@ -222,7 +219,10 @@ function displayUserPosts(posts) {
             <h2 class="post-title">${post.title}</h2>
             <p class="post-body">${post.body}</p>
           </a>
-          ${deleteButtonHTML}
+            <div>
+                ${deleteButtonHTML}
+                ${editButtonHTML}
+            </div>
         </div>
       `;
         postsContainer.innerHTML += postHTML;
@@ -240,9 +240,4 @@ function displayUserPosts(posts) {
     }
 }
 
-if (updateProfileForm) {
-    updateProfileForm.addEventListener("submit", onUpdateProfile);
-} else {
-    console.warn('Update profile form not found in the DOM.');
-}
 

@@ -43,7 +43,7 @@ async function renderPost() {
             ${isOwnProfile ? `
                 <div class="post-actions">
                     <button class="delete-btn" data-post-id="${post.id}">Delete</button>
-                    <a href="/edit/?postID=${post.id}">Edit</a>
+                    <a href="./edit/?postID=${post.id}" class="edit-btn">Edit</a>
                 </div>
             ` : ''}
         </div>
