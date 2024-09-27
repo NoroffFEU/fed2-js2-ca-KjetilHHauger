@@ -3,31 +3,14 @@ import { setLogoutListener } from '../../ui/global/logout';
 import { readProfile } from '../../api/profile/read';
 import { readPostsByUser } from '../../api/post/read';
 import { onDeletePost } from "../../ui/post/delete";
+import { getAuthorIDFromURL } from "../../utilities/getAuthorIDFromURL";
+import { getLoggedInUserName } from "../../utilities/getLoggedInUserName";
 
 document.addEventListener('DOMContentLoaded', () => {
     setLogoutListener();
 });
 
 authGuard();
-
-/**
- * Retrieves the author ID from the URL query parameters.
- *
- * @returns {string|null} The author ID if present, otherwise null.
- */
-function getAuthorIDFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('authorID');
-}
-
-/**
- * Retrieves the logged-in user's username from localStorage.
- *
- * @returns {string|null} The username if present, otherwise null.
- */
-function getLoggedInUserName() {
-    return localStorage.getItem('userID');
-}
 
 const authorID = getAuthorIDFromURL();
 const loggedInUserName = getLoggedInUserName();
